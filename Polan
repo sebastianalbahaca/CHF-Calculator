@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHF Loan Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#chf">CHF Loans</a></li>
+                <li><a href="#calculator" class="active">Calculator</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#blog">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="language-selector">
+            <select id="language">
+                <option value="pl">PL</option>
+                <option value="de">DE</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Main Calculator Section -->
+    <main>
+        <div class="calculator-section">
+            <h1>CALCULATOR</h1>
+            
+            <div class="calculator-container">
+                <div class="progress-indicators">
+                    <div class="step-indicator active">1</div>
+                    <div class="step-indicator">2</div>
+                    <div class="step-indicator">3</div>
+                    <div class="step-indicator">4</div>
+                    <div class="step-indicator">5</div>
+                    <div class="step-indicator">6</div>
+                </div>
+
+                <form id="calculatorForm">
+                    <div class="step active" id="step1">
+                        <h2>Have you ever taken out a CHF loan?</h2>
+                        <div class="button-group">
+                            <button type="button" class="btn-primary">Yes</button>
+                            <button type="button" class="btn-secondary">No</button>
+                        </div>
+                    </div>
+
+                    <div class="step" id="step2">
+                        <div class="form-group">
+                            <label>When did you take the loan?</label>
+                            <select class="form-control">
+                                <option value="">Select year</option>
+                                <!-- Years will be added dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Which bank gave you the loan?</label>
+                            <select class="form-control">
+                                <option value="">Select bank</option>
+                                <!-- Banks will be added dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="currency-selector">
+                            <label>In which currency was the loan taken?</label>
+                            <div class="button-group">
+                                <button type="button" class="btn-currency active">CHF</button>
+                                <button type="button" class="btn-currency">PLN</button>
+                            </div>
+                        </div>
+
+                        <div class="amount-inputs">
+                            <input type="number" class="form-control" placeholder="Amount borrowed">
+                            <input type="number" class="form-control" placeholder="Amount paid">
+                        </div>
+                    </div>
+
+                    <!-- Add remaining steps similarly -->
+                </form>
+
+                <div class="help-notes">
+                    <div class="note">
+                        <span class="note-icon">i</span>
+                        <p>Need help? Contact our support team</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
