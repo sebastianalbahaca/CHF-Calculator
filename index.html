@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHF Loan Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="available-languages" content="en,de,pl">
+
+    <!-- Load dependencies in correct order -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.5.0/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@2.2.2/i18nextHttpBackend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Your Logo" id="logo">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li class="dropdown">
+                    <a href="#about" data-i18n="aboutUs">About Us</a>
+                    <div class="dropdown-menu">
+                        <a href="#who" data-i18n="whoWeAre">WHO WE ARE</a>
+                        <a href="#offer" data-i18n="ourOffer">OUR OFFER</a>
+                        <a href="#partners" data-i18n="partners">PARTNERS</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#chf" data-i18n="chfLoans">CHF Loans</a>
+                    <div class="dropdown-menu">
+                        <a href="#background" data-i18n="background">BACKGROUND</a>
+                        <a href="#situation" data-i18n="currentSituation">CURRENT SITUATION</a>
+                        <a href="#approach" data-i18n="ourApproach">OUR APPROACH</a>
+                    </div>
+                </li>
+                <li><a href="#calculator" data-i18n="calculator">Calculator</a></li>
+                <li><a href="#faq" data-i18n="faq">FAQ</a></li>
+                <li><a href="#contact" data-i18n="contact">Contact</a></li>
+                <li><a href="#blog" data-i18n="blog">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="pl" data-icon="flag-icon-pl">Polski</option>
+                <option value="en" data-icon="flag-icon-gb">English</option>
+                <option value="de" data-icon="flag-icon-de">Deutsch</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Main Calculator Section -->
+    <main>
+        <div class="calculator-container">
+            <div class="progress-bar">
+                <div id="progress"></div>
+            </div>
+
+            <form id="calculatorForm">
+                <div class="step" id="step1">
+                    <h2 data-i18n="loanQuestion">Have you ever taken out a CHF loan?</h2>
+                    <div class="button-group">
+                        <button type="button" class="btn-primary" onclick="handleLoanResponse(true)" data-i18n="yes"></button>
+                        <button type="button" class="btn-secondary" onclick="handleLoanResponse(false)" data-i18n="no"></button>
+                    </div>
+                </div>
+
+                <div class="step" id="noLoanMessage" style="display: none;">
+                    <h2 data-i18n="noLoanMessage">Unfortunately, we can only help with existing CHF loans.</h2>
+                    <div class="navigation-buttons">
+                        <button type="button" class="btn-back" onclick="showStep(1)" data-i18n="back">Back</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step2" style="display: none;">
+                    <h2 data-i18n="whenLoan">When did you take the loan?</h2>
+                    <div class="select-wrapper">
+                        <select id="loanYear" required>
+                            <option value="" disabled selected data-i18n="selectYear">Select a year between 2000 and 2025</option>
+                        </select>
+                    </div>
+
+                    <h2 data-i18n="loanCurrency">Loan Currency</h2>
+                    <div class="button-group currency-buttons">
+                        <button type="button" class="btn-currency" onclick="handleCurrencySelection('CHF')" data-currency="CHF">CHF</button>
+                        <button type="button" class="btn-currency" onclick="handleCurrencySelection('PLN')" data-currency="PLN">PLN</button>
+                    </div>
+
+                    <h2 data-i18n="whichBank">Which bank gave you the loan?</h2>
+                    <div class="select-wrapper">
+                        <select id="loanBank" required>
+                            <option value="" disabled selected data-i18n="selectBank">Select Bank</option>
+                            <option value="millennium">Bank Millennium</option>
+                            <option value="mbank">mBank</option>
+                            <option value="santander">Santander Bank Polska</option>
+                            <option value="pekao">Bank Pekao</option>
+                            <option value="ing">ING Bank Śląski</option>
+                            <option value="bnp">BNP Paribas</option>
+                            <option value="credit_agricole">Credit Agricole</option>
+                            <option value="deutsche">Deutsche Bank Polska</option>
+                            <option value="getin">Getin Noble Bank</option>
+                            <option value="other">Other Bank</option>
+                        </select>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button type="button" class="btn-back" onclick="prevStep()" data-i18n="back">Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep()" data-i18n="next" disabled>Next</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step3" style="display: none;">
+                    <h2 data-i18n="legalActionQuestion">Have you taken any legal action?</h2>
+                    <div class="button-group">
+                        <button type="button" class="btn-primary" onclick="handleLegalAction(true)" data-i18n="yes">Yes</button>
+                        <button type="button" class="btn-secondary" onclick="handleLegalAction(false)" data-i18n="no">No</button>
+                    </div>
+                    <div class="navigation-buttons">
+                        <button type="button" class="btn-back" onclick="prevStep()" data-i18n="back">Back</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step4" style="display: none;">
+                    <h2 data-i18n="contractFinishedQuestion">Is the contract finished, loan has been repaid?</h2>
+                    <div class="button-group">
+                        <button type="button" class="btn-primary" onclick="handleContractFinished(true)" data-i18n="yes">Yes</button>
+                        <button type="button" class="btn-secondary" onclick="handleContractFinished(false)" data-i18n="no">No</button>
+                    </div>
+                    <div class="navigation-buttons">
+                        <button type="button" class="btn-back" onclick="prevStep()" data-i18n="back">Back</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step5" style="display: none;">
+                    <h2 data-i18n="loanDuration">For how many years was the loan taken?</h2>
+                    <input type="number" id="loanDuration" data-i18n-placeholder="yearExample" placeholder="eg. 23" min="1" max="50">
+
+                    <div class="navigation-buttons">
+                        <button type="button" class="btn-back" onclick="prevStep()" data-i18n="back">Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep()" data-i18n="next">Next</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step6" style="display: none;">
+                    <h2 data-i18n="contactInfo">Contact Information</h2>
+                    <input type="text" id="firstName" data-i18n-placeholder="firstName">
+                    <input type="text" id="lastName" data-i18n-placeholder="lastName">
+                    <input type="email" id="email" data-i18n-placeholder="email">
+                    <input type="tel" id="phone" data-i18n-placeholder="phone">
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="privacyConsent">
+                        <label for="privacyConsent" data-i18n="privacy"></label>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button type="button" class="btn-back" onclick="prevStep()" data-i18n="back">Back</button>
+                        <button type="submit" class="btn" data-i18n="send">Send</button>
+                    </div>
+                </div>
+
+                <div id="successMessage" style="display: none;">
+                    <h2 data-i18n="success">Thank you! Your form has been submitted successfully.</h2>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="translations.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,481 @@
+:root {
+    --primary-color: #2E7D32;
+    --secondary-color: #757575;
+    --background-color: #F5F5F5;
+    --border-color: #E0E0E0;
+}
+
+/* Typography */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--background-color);
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.logo-placeholder {
+    background: #f0f0f0;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.menu li {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Language selector styles */
+.language-selector {
+    position: relative;
+    margin-left: 20px;
+}
+
+.language-selector select {
+    padding: 8px 30px 8px 40px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Add flag icons using pseudo-elements */
+.language-selector option {
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px auto;
+}
+
+.language-selector option[value="pl"]::before {
+    content: "🇵🇱";
+    margin-right: 10px;
+}
+
+.language-selector option[value="en"]::before {
+    content: "🇬🇧";
+    margin-right: 10px;
+}
+
+.language-selector option[value="de"]::before {
+    content: "🇩🇪";
+    margin-right: 10px;
+}
+
+.flag-icon {
+    margin-right: 0.5rem;
+}
+
+.calculator-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+/* Main content area */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 100px);  /* Subtract header height */
+    padding: 40px 20px;
+}
+
+/* Container styles */
+.calculator-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 600px;
+    margin: 40px auto;
+    position: relative;
+    min-height: auto;  /* Remove fixed height */
+    height: auto;      /* Let it adjust to content */
+}
+
+/* Progress bar */
+.progress-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #eee;
+    margin-bottom: 30px;
+}
+
+.progress {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+#progress {
+    height: 100%;
+    background: #84b94e;
+    transition: width 0.3s ease;
+}
+
+.progress-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.step-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-indicator.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.step-numbers {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.step-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.step-number.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Step container */
+.step {
+    text-align: center;
+    position: relative;
+    padding: 20px 0 80px;  /* Add padding bottom for buttons */
+    height: auto;          /* Remove fixed height */
+}
+
+.step h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+input, select, button {
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.step input[type="number"],
+.step input[type="text"],
+.step input[type="email"],
+.step input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.step input:focus {
+    outline: none;
+    border-color: #84b94e;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+button.btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.btn:hover {
+    background: #45a049;
+}
+
+/* Yes/No buttons */
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;  /* Adjust margin */
+}
+
+.button-group button {
+    padding: 12px 40px;
+    border-radius: 25px;  /* Rounded edges for Yes/No buttons */
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.button-group button.selected {
+    border: 2px solid #84b94e;
+}
+
+.button-group button.selected.btn-primary {
+    background-color: #729f42;
+}
+
+.button-group button.selected.btn-secondary {
+    background-color: #f5f5f5;
+}
+
+.btn-primary {
+    background: #84b94e;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background: white;
+    border: 2px solid #ddd;
+    color: #333;
+}
+
+.btn-primary:hover {
+    background: #729f42;
+}
+
+.btn-secondary:hover {
+    background: #f5f5f5;
+    border-color: #999;
+}
+
+.currency-buttons {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-currency {
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    background: white;
+    border: 2px solid #ddd;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-currency:hover {
+    border-color: #84b94e;
+    color: #84b94e;
+}
+
+.btn-currency.selected {
+    background: #84b94e;
+    border-color: #84b94e;
+    color: white;
+}
+
+.currency-buttons button {
+    margin: 5px;
+}
+
+.select-wrapper {
+    margin-bottom: 30px;
+}
+
+/* Navigation buttons (Back and Continue) */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-back {
+    background: white;
+    border: 2px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    color: #333;
+}
+
+.btn-back:hover {
+    background: #f5f5f5;
+    border-color: #999;
+}
+
+.btn-next {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    background: #84b94e;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-next:hover {
+    background: #729f42;
+}
+
+.btn-next.active {
+    background-color: #84b94e;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-next.active:hover {
+    background-color: #729f42;
+}
+
+.btn-next[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.help-notes {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #FFF3E0;
+    border-radius: 4px;
+}
+
+.back-button {
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.back-button::before {
+    content: "←";
+    font-size: 1.2rem;
+}
